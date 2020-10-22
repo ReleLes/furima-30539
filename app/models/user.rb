@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :nickname, presence: true
+  validates :nickname, presence: true, length: { maximum: 40 }
 
   #ユーザー本名入力必須かつ、全角（漢字・平仮名・カタカナ）での入力が必須であるバリデーション
   with_options presence: true, format: { with: /\A[ぁ-んァ-ン一-龥]+\z/ } do
