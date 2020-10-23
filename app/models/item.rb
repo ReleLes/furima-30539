@@ -13,8 +13,8 @@ class Item < ApplicationRecord
   has_one_attached :image
 
   # 空の情報は保存できない
-  validates :title, presence: true
-  validates :explain, presence: true
+  validates :title, presence: true, length: { maximum: 40 }
+  validates :explain, presence: true, length: { maximum: 1000 }
   validates :category, presence: true
   validates :status, presence: true
   validates :charge, presence: true

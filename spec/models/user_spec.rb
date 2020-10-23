@@ -5,7 +5,7 @@ describe User do
   end
 
   describe 'ユーザー新規登録' do
-    context '新規登録がうまくいくとき' do
+    context '新規登録がうまくいく場合' do
       it '新規登録時フォームの入力必須欄が存在すれば登録できる' do
         expect(@user).to be_valid
       end
@@ -36,7 +36,7 @@ describe User do
       end
     end
 
-    context '新規登録がうまくいかないとき' do
+    context '新規登録がうまくいかない場合' do
       it 'nicknameが空だと登録できない' do
         @user.nickname = ''
         @user.valid?
