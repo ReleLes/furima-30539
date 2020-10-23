@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   # ログインしていないユーザーはindex意外には遷移できず、ログイン画面に遷移する
-  before_action :move_to_sign, except: [:index]
+  before_action :authenticate_user!, except: [:index]
 
   def index
     @items = Item.all
@@ -23,9 +23,5 @@ class ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(:image, :title, :explain, :category_id, :status_id, :charge_id, :area_id, :arrival_id, :price).merge(user_id: current_user.id)
-  end
-
-  def move_to_sign
-    redirect_to new_user_session_path unless user_signed_in?
   end
 end

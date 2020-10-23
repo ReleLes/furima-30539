@@ -102,10 +102,15 @@ describe Item do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price can't be blank")
       end
-      it 'priceの値が300~9,999,999以外では保存できない' do
+      it 'priceの値が10,000,000以上では保存できない' do
         @item.price = 10000000
         @item.valid?
         expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
+      end
+      it 'priceの値が300未満では保存できない' do
+        @item.price = 299
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
       end
       it 'priceの値が半角数字以外は保存できない' do
         @item.price = "5千円"

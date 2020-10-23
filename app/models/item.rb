@@ -13,23 +13,26 @@ class Item < ApplicationRecord
   has_one_attached :image
 
   # 空の情報は保存できない
-  validates :title, presence: true, length: { maximum: 40 }
-  validates :explain, presence: true, length: { maximum: 1000 }
-  validates :category, presence: true
-  validates :status, presence: true
-  validates :charge, presence: true
-  validates :area, presence: true
-  validates :arrival, presence: true
-  validates :price, presence: true
-  validates :image, presence: true
+  with_options presence: true do
+    validates :title, length: { maximum: 40 }
+    validates :explain, length: { maximum: 1000 }
+    validates :category
+    validates :status
+    validates :charge
+    validates :area
+    validates :arrival
+    validates :price
+    validates :image
+  end
 
   # 選択時が「--」の時は保存できないようにする
-  validates :category_id, numericality: { other_than: 1 }
-  validates :status_id, numericality: { other_than: 1 }
-  validates :charge_id, numericality: { other_than: 1 }
-  validates :area_id, numericality: { other_than: 1 }
-  validates :arrival_id, numericality: { other_than: 1 }
-
+  with_options numericality: { other_than: 1 } do
+    validates :category_id
+    validates :status_id
+    validates :charge_id
+    validates :area_id
+    validates :arrival_id
+  end
   # priceには半角数字のみ保存できる
   VALID_PRICE_REGEX = /\A[0-9]+\z/i.freeze
   validates :price, format: { with: VALID_PRICE_REGEX }
