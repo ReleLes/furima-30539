@@ -4,7 +4,7 @@ class Item < ApplicationRecord
   #activehashを使用したアソシエーション
   belongs_to_active_hash :category
   belongs_to_active_hash :status
-  belongs_to_active_hash :charges
+  belongs_to_active_hash :charge
   belongs_to_active_hash :area
   belongs_to_active_hash :arrival
 
@@ -13,19 +13,20 @@ class Item < ApplicationRecord
   has_one_attached :image
 
   #空の情報は保存できない
-  validate :title, presence: true
-  validate :explain, presence: true
-  validate :category, presence: true
-  validate :status, presence: true
-  validate :charges, presence: true
-  validate :area, presence: true
-  validate :arrival, presence: true
-  validate :price, presence: true
+  validates :title, presence: true
+  validates :explain, presence: true
+  validates :category, presence: true
+  validates :status, presence: true
+  validates :charge, presence: true
+  validates :area, presence: true
+  validates :arrival, presence: true
+  validates :price, presence: true
+  validates :image, presence: true
 
   #選択時が「--」の時は保存できないようにする
   validates :category_id, numericality: { other_than: 1 }
   validates :status_id, numericality: { other_than: 1 }
-  validates :charges_id, numericality: { other_than: 1 }
+  validates :charge_id, numericality: { other_than: 1 }
   validates :area_id, numericality: { other_than: 1 }
   validates :arrival_id, numericality: { other_than: 1 }
 end

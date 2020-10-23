@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-RSpec.describe Charges, type: :model do
+RSpec.describe Charge, type: :model do
   pending "add some examples to (or delete) #{__FILE__}"
 end
