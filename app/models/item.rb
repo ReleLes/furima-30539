@@ -29,4 +29,11 @@ class Item < ApplicationRecord
   validates :charge_id, numericality: { other_than: 1 }
   validates :area_id, numericality: { other_than: 1 }
   validates :arrival_id, numericality: { other_than: 1 }
+
+  #priceには半角数字のみ保存できる
+  VALID_PRICE_REGEX = /\A[0-9]+\z/i
+  validates :price, format: { with: VALID_PRICE_REGEX }
+
+  #価格の範囲のバリデーション(300〜9999999)
+  validates :price, :numericality => { :greater_than_or_equal_to => 300, :less_than_or_equal_to => 9999999 }
 end

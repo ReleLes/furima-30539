@@ -7,6 +7,7 @@ class User < ApplicationRecord
   #アソシエーション
   has_many :items
 
+  #入力必須かつ、最大文字数が40文字以内であるバリデーション
   validates :nickname, presence: true, length: { maximum: 40 }
 
   #ユーザー本名入力必須かつ、全角（漢字・平仮名・カタカナ）での入力が必須であるバリデーション
