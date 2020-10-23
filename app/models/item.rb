@@ -16,17 +16,12 @@ class Item < ApplicationRecord
   with_options presence: true do
     validates :title, length: { maximum: 40 }
     validates :explain, length: { maximum: 1000 }
-    validates :category
-    validates :status
-    validates :charge
-    validates :area
-    validates :arrival
     validates :price
     validates :image
   end
 
   # 選択時が「--」の時は保存できないようにする
-  with_options numericality: { other_than: 1 } do
+  with_options presence: true, numericality: { other_than: 1 } do
     validates :category_id
     validates :status_id
     validates :charge_id
