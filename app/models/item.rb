@@ -11,6 +11,7 @@ class Item < ApplicationRecord
   # アソシエーション
   belongs_to :user
   has_one_attached :image
+  has_one :order
 
   # 空の情報は保存できない
   with_options presence: true do
