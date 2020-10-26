@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  # ログインしていないユーザーはindex意外には遷移できず、ログイン画面に遷移する
+  # ログインしていないユーザーはindex、show意外には遷移できず、ログイン画面に遷移する
   before_action :authenticate_user!, except: [:index,:show]
 
   def index
@@ -25,6 +25,9 @@ class ItemsController < ApplicationController
 
   def edit
     @item = Item.find(params[:id])
+    unless current_user.id == @item.user_id
+      redirect_to root_path
+    end
   end
 
   def update
