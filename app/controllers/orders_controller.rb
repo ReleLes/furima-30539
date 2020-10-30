@@ -1,18 +1,15 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!
+  before_action :item_find, only: [:index, :create]
 
   def index
-    item_find
-    if user_signed_in? && @item.order || user_signed_in? && (current_user.id == @item.user_id)
+    @form_objects = FormObjects.new
+    if @item.order || current_user.id == @item.user_id
       redirect_to root_path
-    elsif user_signed_in?
-      @form_objects = FormObjects.new
-    else
-      redirect_to user_session_path
     end
   end
 
   def create
-    item_find
     @form_objects = FormObjects.new(order_params)
     if @form_objects.valid?
       pay_item
@@ -26,7 +23,7 @@ class OrdersController < ApplicationController
   private
 
   def item_find
-    @item = Item.find(params[:format])
+    @item = Item.find(params[:item_id])
   end
   
   def order_params
