@@ -1,10 +1,10 @@
 class ItemsController < ApplicationController
   # ログインしていないユーザーはindex、show意外には遷移できず、ログイン画面に遷移する
-  before_action :authenticate_user!, except: [:index,:show]
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :item_find, only: [:edit, :show, :update, :destroy]
 
   def index
-    @items = Item.all.order("created_at DESC")
+    @items = Item.all.order('created_at DESC')
   end
 
   def new
@@ -24,9 +24,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    unless current_user.id == @item.user_id
-      redirect_to root_path
-    end
+    redirect_to root_path unless current_user.id == @item.user_id
   end
 
   def update
@@ -38,7 +36,7 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    if @item.user_id == current_user.id 
+    if @item.user_id == current_user.id
       @item.destroy
       redirect_to root_path
     else

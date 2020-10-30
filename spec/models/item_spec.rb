@@ -30,27 +30,27 @@ describe Item do
       it 'category_idがid:1では保存できない' do
         @item.category_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category must be other than 1")
+        expect(@item.errors.full_messages).to include('Category must be other than 1')
       end
       it 'status_idがid:1では保存できない' do
         @item.status_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Status must be other than 1")
+        expect(@item.errors.full_messages).to include('Status must be other than 1')
       end
       it 'charge_idがid:1では保存できない' do
         @item.charge_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Charge must be other than 1")
+        expect(@item.errors.full_messages).to include('Charge must be other than 1')
       end
       it 'area_idがid:1では保存できない' do
         @item.area_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Area must be other than 1")
+        expect(@item.errors.full_messages).to include('Area must be other than 1')
       end
       it 'arrival_idがid:1では保存できない' do
         @item.arrival_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Arrival must be other than 1")
+        expect(@item.errors.full_messages).to include('Arrival must be other than 1')
       end
       it 'priceが空では保存できない' do
         @item.price = ''
@@ -58,24 +58,20 @@ describe Item do
         expect(@item.errors.full_messages).to include("Price can't be blank")
       end
       it 'priceの値が10,000,000以上では保存できない' do
-        @item.price = 10000000
+        @item.price = 10_000_000
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
+        expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
       end
       it 'priceの値が300未満では保存できない' do
         @item.price = 299
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
+        expect(@item.errors.full_messages).to include('Price must be greater than or equal to 300')
       end
       it 'priceの値が半角数字以外は保存できない' do
-        @item.price = "5千円"
+        @item.price = '5千円'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
     end
-    
-    
-    
   end
-  
 end

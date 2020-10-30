@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   # アソシエーション
   has_many :items
+  has_many :orders
 
   # 入力必須かつ、最大文字数が40文字以内であるバリデーション
   validates :nickname, presence: true, length: { maximum: 40 }
