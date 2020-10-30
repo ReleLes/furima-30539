@@ -3,10 +3,10 @@ class OrdersController < ApplicationController
   before_action :item_find, only: [:index, :create]
 
   def index
-    @form_objects = FormObjects.new
     if @item.order || current_user.id == @item.user_id
       redirect_to root_path
     end
+    @form_objects = FormObjects.new
   end
 
   def create
