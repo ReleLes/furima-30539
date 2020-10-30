@@ -1,9 +1,10 @@
 class FormObjects
   include ActiveModel::Model
-  attr_accessor :postal_code, :prefectures_id, :municipalities, :address, :building_name, :phone_number, :user_id, :item_id
+  attr_accessor :postal_code, :prefectures_id, :municipalities, :address, :building_name, :phone_number, :user_id, :item_id, :token, :price
 
   # 空の情報は保存できない
   with_options presence: true do
+    validates :token
     validates :item_id
     validates :user_id
     # 郵便番号に関するバリデーション
