@@ -11,6 +11,10 @@ RSpec.describe FormObjects, type: :model do
       it '商品購入時フォームの入力必須欄が存在すれば登録できる' do
         expect(@form).to be_valid
       end
+      it '商品購入時建物名が空でも登録できる' do
+        @form.building_name = ''
+        expect(@form).to be_valid  
+      end
     end
 
     context '商品が購入できない場合' do

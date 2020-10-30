@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
 
   def index
-    @item = Item.find(params[:format])
+    item_find
     if user_signed_in? && @item.order || user_signed_in? && (current_user.id == @item.user_id)
       redirect_to root_path
     elsif user_signed_in?
@@ -12,7 +12,7 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @item = Item.find(params[:item_id])
+    item_find
     @form_objects = FormObjects.new(order_params)
     if @form_objects.valid?
       pay_item
@@ -25,6 +25,10 @@ class OrdersController < ApplicationController
 
   private
 
+  def item_find
+    @item = Item.find(params[:format])
+  end
+  
   def order_params
     params.require(:form_objects).permit(
       :postal_code, :prefectures_id, :municipalities, :address, :building_name, :phone_number
